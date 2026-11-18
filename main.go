@@ -41,6 +41,11 @@ func handleConnection(conn net.Conn) {
 		contentType = "application/json"
 		body = `{"status":"ok","server":"systems-from-scratch"}`
 
+	case method == "GET" && path == "/deneme1":
+		statusLine = "HTTP/1.1 200 OK"
+		contentType = "text/plain; charset=utf-8"
+		body = "Deneme sayfamıza hos geldin."
+
 	default:
 		statusLine = "HTTP/1.1 404 Not Found"
 		contentType = "text/plain; charset=utf-8"
@@ -48,7 +53,7 @@ func handleConnection(conn net.Conn) {
 	}
 
 	response := fmt.Sprintf(
-		"%s\r\nContent-Type: %s\r\nContent-Length: %d\r\nConnection: close\r\n\r\n%s",
+		"%s\r\nContent-Type: %s\r\nConent-Ltength: %d\r\nConnection: close\r\n\r\n%s",
 		statusLine,
 		contentType,
 		len(body),
